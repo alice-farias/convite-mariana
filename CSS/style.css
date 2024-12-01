@@ -1,0 +1,95 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      #f8d9d6 0,
+      #f8d9d6 25px,
+      #ffffff 25px,
+      #ffffff 50px
+    ); /* Padrão quadriculado */
+  }
+  
+  .book {
+    position: relative;
+    width: 90vw;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 3 / 4; /* Aumenta a altura em relação à largura */
+    perspective: 1500px; /* Perspectiva ajustada para mais realismo */
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+  
+  .page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transform-origin: left center;
+    backface-visibility: hidden;
+    transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 4s cubic-bezier(0.25, 1, 0.5, 1); /* Transição suavizada */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  }
+  
+  .page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px; /* Bordas arredondadas */
+  }
+  
+  /* Efeito de virar a página com profundidade */
+  .page.flipped {
+    transform: rotateY(-180deg) translateZ(2px); /* Ajuste para dar profundidade ao virar a página */
+    z-index: 1 !important;
+    box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.4); /* Sombra maior para efeito de profundidade */
+  }
+  
+  /* Efeito de livro aberto */
+  .page.open {
+    transform: rotateY(0deg) translateZ(10px); /* Efeito de abrir a página */
+    z-index: 2 !important;
+    box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.4); /* Sombra acentuada */
+  }
+  
+  /* Adiciona sombra dinâmica para destacar o movimento */
+  .page:not(.flipped):not(.open) {
+    box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Páginas com diferentes camadas de z-index */
+  .page.cover {
+    z-index: 5;
+  }
+  
+  .page[data-page="1"] {
+    z-index: 4;
+  }
+  
+  .page[data-page="2"] {
+    z-index: 3;
+  }
+  
+  .page[data-page="3"] {
+    z-index: 1;
+  }
+  
+  .page[data-page="4"] {
+    z-index: 0;
+  }
+  
+  .book-wrapper {
+    position: relative;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+  }
+  
